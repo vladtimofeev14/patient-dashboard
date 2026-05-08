@@ -1,0 +1,135 @@
+<header class="topbar">
+  <div class="topbar-inner">
+    <h1>Patient Dashboard</h1>
+    <a class="add-button" routerLink="/patients/new">+ Add patient</a>
+  </div>
+</header>
+
+<main class="dashboard-page">
+  @if (errorMessage(); as message) {
+    <section class="error-toast" role="alert">
+      <span>{{ message }}</span>
+      <button type="button" (click)="dismissError()" aria-label="Dismiss error">×</button>
+    </section>
+  }
+
+  @if (successMessage(); as message) {
+    <section class="success-toast" role="status">
+      <span>{{ message }}</span>
+      <button type="button" (click)="dismissSuccess()" aria-label="Dismiss message">×</button>
+    </section>
+  }
+
+  <section class="section-block">
+    <h2>Patients summary</h2>
+
+    <div class="summary-card">
+      @for (metric of summaryMetrics(); track metric.label) {
+        <article class="summary-metric">
+          <strong>{{ metric.value }}</strong>
+          @if (metric.status) {
+            <app-status-badge [status]="metric.status" />
+          } @else {
+            <span>Total</span>
+          }
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="chart-card" aria-label="Summary chart">
+    <h2>Summary chart</h2>
+
+    <div class="chart-layout">
+      <div class="doughnut-panel">
+        <p-chart type="doughnut" [data]="doughnutData()" [options]="doughnutOptions" />
+      </div>
+
+      <div class="chart-legend">
+        <span>Total</span>
+        <app-status-badge status="active" />
+        <app-status-badge status="pending" />
+        <app-status-badge status="inactive" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block table-section">
+    <h2>Patients table</h2>
+
+    <div class="table-toolbar">
+      <label class="search-control">
+        <img src="assets/icons/search.png" alt="" aria-hidden="true">
+        <input type="search" [value]="search()" (input)="onSearchInput($event)" aria-label="Search patients">
+      </label>
+
+      <label class="select-button status-filter">
+        <img src="assets/icons/filter.png" alt="" aria-hidden="true">
+        <select [value]="statusFilter()" (change)="onStatusFilterChange($event)" aria-label="Filter by status">
+          <option value="all">All</option>
+          <option value="active">Active</option>
+          <option value="pending">Pending</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </label>
+
+      <label class="select-button size-filter">
+        <img src="assets/icons/size.png" alt="" aria-hidden="true">
+        <select [value]="pageSize()" (change)="onPageSizeChange($event)" aria-label="Visible rows">
+          @for (option of pageSizeOptions; track option) {
+            <option [value]="option">{{ option }}</option>
+          }
+        </select>
+      </label>
+    </div>
+
+    <div class="table-card">
+      @if (isPatientsLoading()) {
+        <div class="table-loading">
+          <app-spinner />
+        </div>
+      }
+
+      <div class="table-scroll" [style.max-height]="tableMaxHeight()">
+        <table>
+          <thead>
+            <tr>
+              <th class="number-column"></th>
+              <th>Full name</th>
+              <th>Email</th>
+              <th>Registration Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (patient of patients(); track patient.id; let index = $index) {
+              <tr
+                class="patient-row"
+                role="link"
+                tabindex="0"
+                [routerLink]="['/patients', patient.id]"
+                [attr.aria-label]="'Open patient details for ' + fullName(patient)"
+              >
+                <td class="number-column">{{ rowNumber(index) }}.</td>
+                <td>{{ fullName(patient) }}</td>
+                <td>{{ patient.email }}</td>
+                <td>{{ formatDate(patient.registeredDate) }}</td>
+                <td><app-status-badge [status]="patient.status" /></td>
+              </tr>
+            } @empty {
+              <tr>
+                <td class="empty-row" colspan="5">No patients found</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  @if (isLoading()) {
+    <div class="page-loading" aria-live="polite">
+      <app-spinner />
+    </div>
+  }
+</main>

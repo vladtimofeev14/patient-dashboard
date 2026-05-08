@@ -1,0 +1,74 @@
+<header class="topbar">
+  <div class="topbar-inner">
+    <h1>Patient Details</h1>
+    <a class="secondary-link" routerLink="/dashboard">Back</a>
+  </div>
+</header>
+
+<main class="page-shell">
+  @if (errorMessage(); as message) {
+    <section class="error-toast" role="alert">
+      <span>{{ message }}</span>
+      <button type="button" (click)="dismissError()" aria-label="Dismiss error">×</button>
+    </section>
+  }
+
+  @if (successMessage(); as message) {
+    <section class="success-toast" role="status">
+      <span>{{ message }}</span>
+      <button type="button" (click)="dismissSuccess()" aria-label="Dismiss message">×</button>
+    </section>
+  }
+
+  @if (isLoading()) {
+    <section class="state-card">
+      <app-spinner />
+    </section>
+  } @else if (patient(); as patient) {
+    <section class="detail-card">
+      <div class="detail-heading">
+        <div>
+          <h2>{{ fullName(patient) }}</h2>
+          <p>{{ patient.email }}</p>
+        </div>
+        <app-status-badge [status]="patient.status" />
+      </div>
+
+      <div class="detail-grid">
+        <article>
+          <span>First Name</span>
+          <strong>{{ patient.firstName }}</strong>
+        </article>
+        <article>
+          <span>Last Name</span>
+          <strong>{{ patient.lastName }}</strong>
+        </article>
+        <article>
+          <span>Email</span>
+          <strong>{{ patient.email }}</strong>
+        </article>
+        <article>
+          <span>Date of Birth</span>
+          <strong>{{ formatDate(patient.dateOfBirth) }}</strong>
+        </article>
+        <article>
+          <span>Registered Date</span>
+          <strong>{{ formatDate(patient.registeredDate) }}</strong>
+        </article>
+        <article>
+          <span>Status</span>
+          <label class="status-select">
+            <select [value]="patient.status" (change)="onStatusChange($event)" [disabled]="isStatusSaving()">
+              @for (status of statuses; track status) {
+                <option [value]="status">{{ status.charAt(0).toUpperCase() + status.slice(1) }}</option>
+              }
+            </select>
+            @if (isStatusSaving()) {
+              <app-spinner [compact]="true" />
+            }
+          </label>
+        </article>
+      </div>
+    </section>
+  }
+</main>

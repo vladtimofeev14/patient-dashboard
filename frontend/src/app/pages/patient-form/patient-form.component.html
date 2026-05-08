@@ -1,0 +1,77 @@
+<header class="topbar">
+  <div class="topbar-inner">
+    <h1>Add Patient</h1>
+    <a class="secondary-link" routerLink="/dashboard">Back</a>
+  </div>
+</header>
+
+<main class="page-shell">
+  @if (errorMessage(); as message) {
+    <section class="error-toast" role="alert">
+      <span>{{ message }}</span>
+      <button type="button" (click)="dismissError()" aria-label="Dismiss error">×</button>
+    </section>
+  }
+
+  <section class="form-card">
+    <h2>Patient information</h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <div class="form-grid">
+        <label class="field">
+          <span>First Name</span>
+          <input type="text" formControlName="firstName" autocomplete="given-name">
+          @if (showError('firstName')) {
+            <small>{{ fieldError('firstName') }}</small>
+          }
+        </label>
+
+        <label class="field">
+          <span>Last Name</span>
+          <input type="text" formControlName="lastName" autocomplete="family-name">
+          @if (showError('lastName')) {
+            <small>{{ fieldError('lastName') }}</small>
+          }
+        </label>
+
+        <label class="field wide">
+          <span>Email</span>
+          <input type="email" formControlName="email" autocomplete="email">
+          @if (showError('email')) {
+            <small>{{ fieldError('email') }}</small>
+          }
+        </label>
+
+        <label class="field">
+          <span>Date of Birth</span>
+          <input type="date" formControlName="dateOfBirth">
+          @if (showError('dateOfBirth')) {
+            <small>{{ fieldError('dateOfBirth') }}</small>
+          }
+        </label>
+
+        <label class="field">
+          <span>Status</span>
+          <select formControlName="status">
+            @for (status of statuses; track status) {
+              <option [value]="status">{{ status.charAt(0).toUpperCase() + status.slice(1) }}</option>
+            }
+          </select>
+          @if (showError('status')) {
+            <small>{{ fieldError('status') }}</small>
+          }
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <a class="secondary-link" routerLink="/dashboard">Cancel</a>
+        <button class="submit-button" type="submit" [disabled]="isSaving()">
+          @if (isSaving()) {
+            <app-spinner [compact]="true" />
+          }
+          <span>Submit</span>
+        </button>
+      </div>
+    </form>
+  </section>
+</main>

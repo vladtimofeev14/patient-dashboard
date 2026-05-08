@@ -1,0 +1,390 @@
+.topbar {
+  height: 90px;
+  background: #ffffff;
+}
+
+.topbar-inner {
+  max-width: 1216px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.add-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 166px;
+  height: 56px;
+  padding: 0 20px;
+  color: #ffffff;
+  background: #696bff;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 22px;
+  box-shadow: 0 10px 22px rgba(105, 107, 255, 0.18);
+}
+
+.dashboard-page {
+  position: relative;
+  max-width: 1216px;
+  min-height: calc(100vh - 90px);
+  margin: 0 auto;
+  padding: 34px 24px 72px;
+}
+
+.section-block h2,
+.chart-card h2 {
+  margin: 0 0 18px;
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+.summary-card,
+.chart-card,
+.table-card {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 3px 10px rgba(14, 14, 25, 0.08);
+}
+
+.summary-card {
+  min-height: 160px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  padding: 34px 32px;
+}
+
+.summary-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.summary-metric strong {
+  font-size: 44px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.summary-metric span,
+.summary-metric app-status-badge {
+  font-size: 26px;
+  line-height: 1.1;
+}
+
+.chart-card {
+  margin-top: 32px;
+  padding: 31px 32px 43px;
+}
+
+.chart-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 380px) minmax(150px, 1fr);
+  gap: 80px;
+  align-items: center;
+}
+
+.doughnut-panel {
+  height: 284px;
+}
+
+.chart-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 27px;
+  line-height: 1.1;
+}
+
+.table-section {
+  margin-top: 33px;
+}
+
+.table-toolbar {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) 152px 98px;
+  gap: 32px;
+  align-items: center;
+  margin: 52px 0 34px;
+}
+
+.search-control,
+.select-button {
+  display: flex;
+  align-items: center;
+  height: 56px;
+}
+
+.search-control {
+  gap: 12px;
+  min-width: 0;
+  padding: 0 22px;
+  background: #ffffff;
+  border-radius: 13px;
+  box-shadow: 0 3px 10px rgba(14, 14, 25, 0.08);
+}
+
+.search-control img {
+  width: 24px;
+  height: 24px;
+  opacity: 0.75;
+}
+
+.search-control input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  font-size: 20px;
+  background: transparent;
+}
+
+.select-button {
+  position: relative;
+  gap: 8px;
+  justify-content: center;
+  color: #ffffff;
+  background: #696bff;
+  border-radius: 13px;
+  box-shadow: 0 10px 22px rgba(105, 107, 255, 0.18);
+}
+
+.select-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.select-button select {
+  width: auto;
+  color: #ffffff;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  appearance: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.status-filter select {
+  min-width: 44px;
+}
+
+.size-filter select {
+  min-width: 34px;
+}
+
+.select-button option {
+  color: #070707;
+}
+
+.table-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.table-scroll {
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 22px;
+}
+
+thead {
+  background: #f0f0f8;
+}
+
+th,
+td {
+  height: 62px;
+  padding: 0 20px;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid #c8c8c8;
+}
+
+th {
+  height: 34px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #f0f0f8;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 29%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 38%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  width: 21%;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+  width: 17%;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+tbody tr.patient-row {
+  cursor: pointer;
+  transition: background-color 0.16s ease;
+}
+
+tbody tr.patient-row:hover,
+tbody tr.patient-row:focus-visible {
+  background: #f6f6ff;
+  outline: none;
+}
+
+tbody tr.patient-row:focus-visible td:first-child {
+  box-shadow: inset 4px 0 0 #696bff;
+}
+
+.number-column {
+  width: 84px;
+  text-align: right;
+  padding-right: 12px;
+}
+
+.empty-row {
+  height: 96px;
+  text-align: center;
+  color: #777777;
+}
+
+.table-loading,
+.page-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.68);
+  z-index: 3;
+}
+
+.page-loading {
+  position: fixed;
+  pointer-events: none;
+}
+
+.error-toast,
+.success-toast {
+  position: sticky;
+  top: 16px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding: 14px 18px;
+  border-radius: 10px;
+}
+
+.error-toast {
+  color: #842029;
+  background: #f8d7da;
+  border: 1px solid #f1aeb5;
+}
+
+.success-toast {
+  color: #0f5132;
+  background: #d1e7dd;
+  border: 1px solid #a3cfbb;
+}
+
+.error-toast button,
+.success-toast button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .summary-card {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .chart-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .table-toolbar {
+    grid-template-columns: 1fr 130px 90px;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 680px) {
+  .topbar {
+    height: auto;
+  }
+
+  .topbar-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .dashboard-page {
+    padding-inline: 16px;
+  }
+
+  .section-block h2,
+  .chart-card h2 {
+    font-size: 28px;
+  }
+
+  .summary-card {
+    grid-template-columns: 1fr;
+  }
+
+  .table-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .select-button {
+    justify-content: flex-start;
+    padding-left: 20px;
+  }
+
+  table {
+    min-width: 900px;
+  }
+}
